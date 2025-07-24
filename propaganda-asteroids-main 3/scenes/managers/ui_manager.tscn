@@ -1,0 +1,400 @@
+[gd_scene load_steps=26 format=3 uid="uid://cdbqn35l6oxha"]
+
+[ext_resource type="Script" uid="uid://v3yhkitng47m" path="res://scripts/managers/UIManager.gd" id="1_mpd4i"]
+[ext_resource type="PackedScene" uid="uid://bc51efbyjg2sg" path="res://scenes/death_scene.tscn" id="2_id3g5"]
+[ext_resource type="PackedScene" uid="uid://cshvo4cd408sm" path="res://scenes/ui/notification.tscn" id="2_tu02a"]
+[ext_resource type="PackedScene" uid="uid://c16pnf7ty4o08" path="res://scenes/start_run.tscn" id="3_nxfho"]
+[ext_resource type="Script" uid="uid://dg2rbolnjklge" path="res://scripts/fuel.gd" id="4_a7j1f"]
+[ext_resource type="PackedScene" uid="uid://cr70ytbjn72bw" path="res://scenes/ui/contract_scene.tscn" id="4_dgnm4"]
+[ext_resource type="Script" uid="uid://bhrq1l2ba8qeu" path="res://scripts/ui/shop_mission_interfaces.gd" id="5_dgnm4"]
+[ext_resource type="Script" uid="uid://dthu1u871n6xu" path="res://scripts/label_money_amount.gd" id="5_id3g5"]
+[ext_resource type="Texture2D" uid="uid://bfnedgbgrilvy" path="res://assets/ui/T_shop.png" id="6_ytsje"]
+[ext_resource type="Script" uid="uid://clblkwtktv1u7" path="res://scripts/ui/item_grid_container.gd" id="7_m2gsp"]
+[ext_resource type="Script" uid="uid://1w7kefe1b4ai" path="res://scripts/ui/item_purchase_interface.gd" id="8_tu02a"]
+[ext_resource type="PackedScene" uid="uid://w4nlxci4ykha" path="res://scenes/ui/item_sub_viewport.tscn" id="9_2whxp"]
+[ext_resource type="Texture2D" uid="uid://b30g40cinouoo" path="res://assets/ui/T_mission.png" id="10_0d6jp"]
+[ext_resource type="Script" uid="uid://df7nyjxol6syj" path="res://scripts/ui/mission_interface.gd" id="12_ytsje"]
+[ext_resource type="PackedScene" uid="uid://c63ewp0wfu3g5" path="res://scenes/ui/confirmation_popup.tscn" id="13_a7j1f"]
+[ext_resource type="Script" uid="uid://dgrnw5eysolw8" path="res://scripts/no_money_popup.gd" id="14_dgnm4"]
+[ext_resource type="Theme" uid="uid://mbsg4xqnedxi" path="res://assets/ui/theme/FlatUI4/kenneyUI-red.tres" id="15_0d6jp"]
+[ext_resource type="Theme" uid="uid://6shp5ck1tnja" path="res://assets/ui/theme/FlatUI4/kenneyUI.tres" id="16_8t74x"]
+[ext_resource type="Script" uid="uid://b53blbfibsubs" path="res://scripts/ui/mission_popup.gd" id="16_m2gsp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5newe"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0d6jp"]
+viewport_path = NodePath(".")
+
+[sub_resource type="ImageTexture" id="ImageTexture_tu02a"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_2whxp"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0d6jp"]
+thickness = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8t74x"]
+bg_color = Color(0.117647, 0.654902, 0.882353, 1)
+
+[node name="UIManager" type="Node"]
+script = ExtResource("1_mpd4i")
+
+[node name="death_scene" parent="." instance=ExtResource("2_id3g5")]
+
+[node name="start_scene" parent="." instance=ExtResource("3_nxfho")]
+visible = false
+
+[node name="contract_scene" parent="." instance=ExtResource("4_dgnm4")]
+
+[node name="ShopMissionInterfaces" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("5_dgnm4")
+
+[node name="TabContainer" type="TabContainer" parent="ShopMissionInterfaces"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 1
+tabs_visible = false
+
+[node name="Shop" type="TabBar" parent="ShopMissionInterfaces/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Wallpaper" type="TextureRect" parent="ShopMissionInterfaces/TabContainer/Shop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ytsje")
+expand_mode = 1
+
+[node name="ShopInterface" type="Control" parent="ShopMissionInterfaces/TabContainer/Shop"]
+custom_minimum_size = Vector2(800, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -210.0
+offset_right = 400.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ShopMissionInterfaces/TabContainer/Shop/ShopInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.203922, 0.2, 0.752941)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ShopMissionInterfaces/TabContainer/Shop/ShopInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -210.0
+offset_right = 400.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="ShopMissionInterfaces/TabContainer/Shop/ShopInterface/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+script = ExtResource("7_m2gsp")
+
+[node name="PurchaseInterface" type="Control" parent="ShopMissionInterfaces/TabContainer/Shop"]
+visible = false
+custom_minimum_size = Vector2(800, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_right = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_tu02a")
+visual3D = SubResource("BoxMesh_5newe")
+title = "Cubium"
+price = 75
+description = "The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. "
+
+[node name="ColorRect" type="ColorRect" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.203922, 0.2, 0.752941)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemPreview" type="VBoxContainer" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemPreview"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_0d6jp")
+stretch_mode = 3
+
+[node name="ItemTitle" type="Label" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemPreview"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Cubium"
+horizontal_alignment = 1
+
+[node name="ItemSubViewport" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemPreview" instance=ExtResource("9_2whxp")]
+own_world_3d = true
+
+[node name="MeshInstance3D" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemPreview/ItemSubViewport/Pivot" index="0"]
+mesh = SubResource("BoxMesh_5newe")
+
+[node name="ItemDetails" type="VBoxContainer" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemDetails"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+text = "The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. The Cubium be Cubing. "
+
+[node name="Button" type="Button" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemDetails"]
+layout_mode = 2
+text = "BUY FOR 75$"
+
+[node name="Label" type="Label" parent="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemDetails"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "(read through the full product description)"
+
+[node name="Mission" type="TabBar" parent="ShopMissionInterfaces/TabContainer"]
+layout_mode = 2
+script = ExtResource("12_ytsje")
+metadata/_tab_index = 1
+
+[node name="Wallpaper2" type="TextureRect" parent="ShopMissionInterfaces/TabContainer/Mission"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_0d6jp")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ShopMissionInterfaces"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 203.0
+offset_bottom = 74.0
+
+[node name="VBoxContainer" type="HBoxContainer" parent="ShopMissionInterfaces/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ExitButton" type="Button" parent="ShopMissionInterfaces/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("15_0d6jp")
+text = "BACK"
+
+[node name="ShopTabButton" type="Button" parent="ShopMissionInterfaces/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme = ExtResource("16_8t74x")
+text = "Shop"
+
+[node name="MissionTabButton" type="Button" parent="ShopMissionInterfaces/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme = ExtResource("16_8t74x")
+text = "Mission"
+
+[node name="ConfirmationPopup" parent="ShopMissionInterfaces" instance=ExtResource("13_a7j1f")]
+unique_name_in_owner = true
+visible = false
+
+[node name="NoMoneyPopup" type="PopupPanel" parent="ShopMissionInterfaces"]
+unique_name_in_owner = true
+mode = 2
+initial_position = 2
+size = Vector2i(1300, 900)
+script = ExtResource("14_dgnm4")
+
+[node name="ColorRect" type="ColorRect" parent="ShopMissionInterfaces/NoMoneyPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1296.0
+offset_bottom = 896.0
+
+[node name="Label" type="Label" parent="ShopMissionInterfaces/NoMoneyPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1296.0
+offset_bottom = 896.0
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="CloseTimer" type="Timer" parent="ShopMissionInterfaces/NoMoneyPopup"]
+wait_time = 5.0
+
+[node name="MissionPopup" type="PanelContainer" parent="ShopMissionInterfaces"]
+visible = false
+offset_right = 1028.0
+offset_bottom = 525.0
+script = ExtResource("16_m2gsp")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ShopMissionInterfaces/MissionPopup"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopMissionInterfaces/MissionPopup/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="ShopMissionInterfaces/MissionPopup/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+
+[node name="TextureRect" type="TextureRect" parent="ShopMissionInterfaces/MissionPopup/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+stretch_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopMissionInterfaces/MissionPopup/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "flajksföljksdfökl"
+fit_content = true
+tab_size = 2
+
+[node name="Button" type="Button" parent="ShopMissionInterfaces/MissionPopup/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "I want to start this Mission
+"
+
+[node name="notification" parent="." instance=ExtResource("2_tu02a")]
+visible = false
+
+[node name="IngameInterface" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="IngameInterface"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -262.0
+offset_bottom = 80.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 0.376471)
+
+[node name="LabelFuel" type="Label" parent="IngameInterface"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -242.0
+offset_top = 44.0
+offset_right = -188.0
+offset_bottom = 67.0
+grow_horizontal = 0
+text = "Fuel"
+
+[node name="fuel_amount_slider" type="HSlider" parent="IngameInterface"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -157.0
+offset_top = 44.0
+offset_right = -29.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_icons/grabber = SubResource("ImageTexture_tu02a")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_2whxp")
+theme_override_styles/slider = SubResource("StyleBoxLine_0d6jp")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_8t74x")
+value = 50.0
+editable = false
+scrollable = false
+script = ExtResource("4_a7j1f")
+
+[node name="LabelMoney" type="Label" parent="IngameInterface"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -242.0
+offset_top = 14.0
+offset_right = -188.0
+offset_bottom = 37.0
+grow_horizontal = 0
+text = "CASH"
+
+[node name="LabelMoneyAmount" type="Label" parent="IngameInterface"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
+offset_top = 14.0
+offset_right = -102.0
+offset_bottom = 37.0
+grow_horizontal = 0
+text = "$$$"
+script = ExtResource("5_id3g5")
+
+[connection signal="next_run" from="death_scene" to="." method="_on_death_scene_next_run"]
+[connection signal="start_run" from="start_scene" to="." method="_on_start_run"]
+[connection signal="accept_contract" from="contract_scene" to="." method="_on_contract_scene_accept_contract"]
+[connection signal="mission_open_pressed" from="ShopMissionInterfaces" to="." method="_on_shop_mission_interfaces_mission_open_pressed"]
+[connection signal="ship_fly" from="ShopMissionInterfaces" to="." method="_on_shop_mission_interfaces_ship_fly"]
+[connection signal="panel_buy_pressed" from="ShopMissionInterfaces/TabContainer/Shop/ShopInterface/ScrollContainer/GridContainer" to="." method="_on_grid_container_panel_buy_pressed"]
+[connection signal="open_mission_button" from="ShopMissionInterfaces/TabContainer/Mission" to="ShopMissionInterfaces" method="_on_mission_open_mission_button"]
+[connection signal="pressed" from="ShopMissionInterfaces/MarginContainer/VBoxContainer/ExitButton" to="ShopMissionInterfaces" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ShopMissionInterfaces/MarginContainer/VBoxContainer/ShopTabButton" to="ShopMissionInterfaces" method="_on_shop_tab_button_pressed"]
+[connection signal="pressed" from="ShopMissionInterfaces/MarginContainer/VBoxContainer/MissionTabButton" to="ShopMissionInterfaces" method="_on_mission_tab_button_pressed"]
+[connection signal="terms_accepted" from="ShopMissionInterfaces/ConfirmationPopup" to="." method="_on_confirmation_popup_terms_accepted"]
+[connection signal="timeout" from="ShopMissionInterfaces/NoMoneyPopup/CloseTimer" to="ShopMissionInterfaces/NoMoneyPopup" method="_on_close_timer_timeout"]
+[connection signal="on_finish_mission_popup_button_pressed" from="ShopMissionInterfaces/MissionPopup" to="." method="_on_mission_popup_on_finish_mission_popup_button_pressed"]
+[connection signal="on_mission_popup_button_pressed" from="ShopMissionInterfaces/MissionPopup" to="." method="_on_mission_popup_on_mission_popup_button_pressed"]
+[connection signal="pressed" from="ShopMissionInterfaces/MissionPopup/ScrollContainer/VBoxContainer/Button" to="ShopMissionInterfaces/MissionPopup" method="_on_button_pressed"]
+
+[editable path="ShopMissionInterfaces/TabContainer/Shop/PurchaseInterface/HBoxContainer/ItemPreview/ItemSubViewport"]

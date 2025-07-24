@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx2bqpsqh04ct"]
+
+[ext_resource type="Script" uid="uid://duo0608a14l5p" path="res://scripts/zones/zone.gd" id="1_g7a44"]
+
+[node name="Zone" type="Node3D"]
+script = ExtResource("1_g7a44")
+
+[node name="ZoneArea" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="ZoneProximity" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[connection signal="body_entered" from="ZoneArea" to="." method="_on_body_enter_zone"]
+[connection signal="body_entered" from="ZoneProximity" to="." method="_on_zone_proximity_body_entered"]
+[connection signal="body_exited" from="ZoneProximity" to="." method="_on_zone_proximity_body_exited"]

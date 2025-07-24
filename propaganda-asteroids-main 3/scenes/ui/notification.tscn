@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cshvo4cd408sm"]
+
+[ext_resource type="Script" uid="uid://cxq3lmhs36op7" path="res://scripts/ui/notification.gd" id="1_u4fg0"]
+
+[node name="Notification" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_u4fg0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1000, 500)
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5

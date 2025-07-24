@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq7rnm72gyxpw"]
+
+[sub_resource type="GDScript" id="GDScript_dttsx"]
+script/source = "extends Area3D
+
+signal ship_hits_astroid
+@onready var ship: CharacterBody3D = %Ship
+@export var health = 3
+
+func _on_area_entered(bullet: Area3D) -> void:
+	health -= ship.weapon_damage
+	bullet.queue_free()
+	if health <= 0:
+		queue_free()
+		
+
+func _on_body_entered(body: Node3D) -> void:
+	ship_hits_astroid.emit()
+	
+	
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dttsx"]
+
+[node name="Node3D" type="Area3D"]
+collision_layer = 4
+collision_mask = 10
+script = SubResource("GDScript_dttsx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_dttsx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
